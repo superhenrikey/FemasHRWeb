@@ -140,7 +140,7 @@ namespace FemasCloudWnc
 
         private void FemasCloudWnc_Load(object sender, EventArgs e)
         {
-            var NightSift = dtNowHour > 18 || dtNowHour < 7;
+            var NightSift = (dtNowHour == 19 && DateTime.Now.Minute > 30) || dtNowHour == 8;
             var jsonPath = Path.Combine(ConfigurationManager.AppSettings["ConfigPath"], "EmpInfo.json");
             try
             {
