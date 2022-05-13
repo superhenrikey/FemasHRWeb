@@ -37,9 +37,10 @@ namespace FemasCloudWnc
                 doc.GetElementById("user_passwd").SetAttribute("Value", UserPass);
                 doc.InvokeScript("new_login");
             }
-            catch (Exception)
+            catch (Exception )
             {
-                SendMail();
+                string a = "ddd";
+               // SendMail();
             }
         }
 
@@ -57,8 +58,8 @@ namespace FemasCloudWnc
                 }
             }
 
-            if (!chkStart)
-                SendMail();
+           // if (!chkStart)
+              //  SendMail();
         }
 
         private void btnEnd_Click(object sender, EventArgs e)
@@ -73,8 +74,8 @@ namespace FemasCloudWnc
                     return;
                 }
             }
-            if (!chkEnd)
-                SendMail();
+            //if (!chkEnd)
+               // SendMail();
         }
 
         private void CheckClickDone() {
@@ -149,7 +150,7 @@ namespace FemasCloudWnc
                 {
                     EmpInfos = JsonConvert.DeserializeObject<List<EmpInfos>>(json);
 #if DEBUG
-                    EmpInfos = EmpInfos.Where(r => r.EmpNo == "19700327").ToList();
+                    EmpInfos = EmpInfos.Where(r => r.EmpNo == "21700590").ToList();
 #else
                     EmpInfos = EmpInfos.Where(r => r.IsNightShift == NightSift).OrderBy(_ => Guid.NewGuid()).ToList();
 #endif
@@ -165,14 +166,14 @@ namespace FemasCloudWnc
                 }
             }
             catch (Exception ex) {
-                WNC.SFCS.Mail.PMail pMail = new WNC.SFCS.Mail.PMail(WNC.SFCS.Shared.EnvType.VN_Production_VN2.ToString());
-                pMail.Subject = "[LỖI] FemasCloudWnc_Load function";
-                pMail.IsBodyHtml = false;
-                pMail.Body = "Dear Sir,";
-                pMail.WriteLine(ex.Message);
-                pMail.Priority = System.Net.Mail.MailPriority.High;
-                pMail.To.Add("19700327");
-                pMail.Send();
+                //WNC.SFCS.Mail.PMail pMail = new WNC.SFCS.Mail.PMail(WNC.SFCS.Shared.EnvType.VN_Production_VN2.ToString());
+                //pMail.Subject = "[LỖI] FemasCloudWnc_Load function";
+                //pMail.IsBodyHtml = false;
+                //pMail.Body = "Dear Sir,";
+                //pMail.WriteLine(ex.Message);
+                //pMail.Priority = System.Net.Mail.MailPriority.High;
+                //pMail.To.Add("19700327");
+                //pMail.Send();
                 Environment.Exit(0);
             }
             timerStart.Interval = 10000;
@@ -215,11 +216,11 @@ namespace FemasCloudWnc
                 pMail.WriteLine(string.Format("Chấm công cho mã thẻ:{0} thất bại. Vui lòng kiểm tra lại!", UserId));
                 pMail.Priority = System.Net.Mail.MailPriority.High;
 #if DEBUG
-                pMail.To.Add("19700327");
+                pMail.To.Add("21700590");
 #else
                 pMail.To.Add(UserId);
 #endif
-                pMail.Bcc.Add("19700327");
+                pMail.Bcc.Add("21700590");
                 pMail.Send();
                 Logout();
                 return;
